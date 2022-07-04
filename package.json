@@ -1,12 +1,19 @@
 {
   "name": "recoil-observer",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
-  "main": "dist/index.js",
+  "main": "src/RecoilObserver.tsx",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsup"
   },
   "keywords": [],
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "react": "^18.2.0",
+    "recoil": "^0.7.4"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.14"
+  }
 }

@@ -1,34 +1,35 @@
-<h1 align="center">Welcome to recoil-observer 👋</h1>
-<p>
-  <img alt="Version" src="https://img.shields.io/badge/version-0.0.1-blue.svg?cacheSeconds=2592000" />
-  <a href="#" target="_blank">
-    <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
-  </a>
-</p>
+<h1 align="center">Recoil-observer</h1>
 
 > Observe reocil atom outside of react
 
 ## Install
 
 ```sh
-npm install
+npm install recoil-observer
 ```
 
-## Run tests
+## Usage
 
-```sh
-npm run test
+```tsx
+import { RecoilObserver } from '../../'
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <RecoilRoot>
+    // ...
+    <RecoilObserver />
+    // ...
+  </RecoilRoot>
+)
+
+//
+
+import { register, unregister } from '../../../'
+import { countAtom } from './count'
+
+function handler(v: any) {
+  console.log('observing atom outside of react is success!. now exit')
+  recoilObserver.unregister(countAtom, handler)
+}
+
+recoilObserver.register(countAtom, handler)
 ```
-
-## Author
-
-👤 **dudlf**
-
-* Github: [@dudlf](https://github.com/dudlf)
-
-## Show your support
-
-Give a ⭐️ if this project helped you!
-
-***
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
