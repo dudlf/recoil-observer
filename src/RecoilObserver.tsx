@@ -70,9 +70,9 @@ function AtomObserver({atom}: {atom: RecoilState<any>}) {
 }
 
 /**
- *  regsiter `fn` for listening `atom`
+ *  subscribe `fn` for listening `atom`
  */
-export function register<T>(atom: RecoilState<T>, fn: AtomListener<T> | null) {
+export function subscribe<T>(atom: RecoilState<T>, fn: AtomListener<T> | null) {
   const listenerSet = atomListeners.get(atom) || new Set()
 
   if (fn) {
@@ -88,11 +88,11 @@ export function register<T>(atom: RecoilState<T>, fn: AtomListener<T> | null) {
 }
 
 /**
- *  unregister `fn` from listeners for given `atom`
+ *  unsubscribe `fn` from listeners for given `atom`
  * 
  *  if there is no listner listening `atom`, the observer jsx element will be removed immediately
  */
-export function unregister<T>(atom: RecoilState<T>, fn: AtomListener<T>) {
+export function unsubscribe<T>(atom: RecoilState<T>, fn: AtomListener<T>) {
   const listenerSet = atomListeners.get(atom)
 
   if (listenerSet) {
@@ -107,7 +107,7 @@ export function unregister<T>(atom: RecoilState<T>, fn: AtomListener<T>) {
 }
 
 /**
- *  return the number of listeners listening given atom
+ *  return the number of subscribers of given `atom`
  */
 export function size(atom: RecoilState<any>) {
   return atomListeners.get(atom)?.size || 0
