@@ -50,9 +50,7 @@ export function createContext() {
       }
     }, [])
 
-    const observers = Array.from(atomObservers.values())
-
-    return <>{observers}</>
+    return <>{[...atomObservers.values()]}</>
   }
 
   /**
