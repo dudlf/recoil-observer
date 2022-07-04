@@ -60,9 +60,11 @@ export function RecoilObserver() {
 function AtomObserver({atom}: {atom: RecoilState<any>}) {
   const value = useRecoilValue(atom)
 
-  atomListeners.get(atom)?.forEach((fn) => {
-    fn?.(value)
-  })
+  useEffect(() => {
+    atomListeners.get(atom)?.forEach((fn) => {
+      fn?.(value)
+    })
+  }, [value])
 
   return <></>
 }

@@ -6,7 +6,7 @@ import { useRecoilState } from 'recoil'
 import { countAtom } from './recoil/count'
 
 function App() {
-  import('./recoil/listen-count')
+  
   const [count, setCount] = useRecoilState(countAtom)
 
   const hooks = [() => useState(0), () => useState(0)]
