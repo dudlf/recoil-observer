@@ -1,13 +1,19 @@
 {
   "name": "recoil-observer",
-  "version": "0.1.0",
-  "description": "",
+  "version": "0.1.1",
+  "description": "Observe recoil atoms outside of react",
   "main": "src/RecoilObserver.tsx",
-  "scripts": {
-    "build": "tsup"
-  },
-  "keywords": [],
-  "author": "",
+  "files": [
+    "src/RecoilObserver.tsx"
+  ],
+  "keywords": [
+    "react",
+    "recoil",
+    "recoil-observe",
+    "observe",
+    "typescript"
+  ],
+  "author": "dudlf",
   "license": "MIT",
   "dependencies": {
     "react": "^18.2.0",
@@ -15,5 +21,9 @@
   },
   "devDependencies": {
     "@types/react": "^18.0.14"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dudlf/recoil-observer"
   }
 }

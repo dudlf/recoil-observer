@@ -33,3 +33,7 @@ function handler(v: any) {
 
 recoilObserver.register(countAtom, handler)
 ```
+
+
+## LICENSE
+MIT
