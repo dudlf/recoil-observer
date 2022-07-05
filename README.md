@@ -1,6 +1,6 @@
 <h1 align="center">Recoil-observer</h1>
 
-> Observe reocil atom outside of react
+> Observe recoil atom outside of react
 
 ## Install
 
