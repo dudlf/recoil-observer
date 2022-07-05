@@ -57,9 +57,20 @@ export function createContext() {
    *  JSX Element which listen change on given atom
    */
   function AtomObserver({ atom }: { atom: RecoilState<any> }) {
+    const [mounted, setMounted] = useState(false)
+
     const value = useRecoilValue(atom)
 
     useEffect(() => {
+      setMounted(true)
+
+      return () => {
+        setMounted(false)
+      }
+    }, [])
+
+    useEffect(() => {
+      if (mounted) {
       atomListeners.get(atom)?.forEach((fn) => {
         fn?.(value)
       })
