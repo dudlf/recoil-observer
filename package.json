@@ -1,6 +1,6 @@
 {
   "name": "recoil-observer",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Observe recoil atoms outside of react",
   "main": "src/RecoilObserver.tsx",
   "files": [

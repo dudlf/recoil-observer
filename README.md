@@ -11,7 +11,7 @@ npm install recoil-observer
 ## Usage
 
 ```tsx
-import { RecoilObserver } from '../../'
+import { RecoilObserver } from 'recoil-observer'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <RecoilRoot>
@@ -22,18 +22,19 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 )
 
 //
-
-import { register, unregister } from '../../../'
-import { countAtom } from './count'
+import { useRecoilValue } from 'recoil'
+import { subscribe, unsubscribe } from 'recoil-boserver'
 
 function handler(v: any) {
-  console.log('observing atom outside of react is success!. now exit')
-  recoilObserver.unregister(countAtom, handler)
+  console.log('observing atom outside of react!')
+
+  // using hook in handler will throw error(invalid hook usage)
+  const atomValue = useRecoilValue(someAtom)
 }
 
-recoilObserver.register(countAtom, handler)
+subscribe(someAtom, handler)
 ```
 
-
 ## LICENSE
+
 MIT
