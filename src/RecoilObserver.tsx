@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { atom, RecoilState, useRecoilState, useRecoilValue } from 'recoil'
 
 export type AtomListener<T> = (value: T) => void
@@ -13,21 +13,10 @@ export function createContext() {
   })
 
   // this trigger will update recoil-observer up-to date
-  let trigger: (() => void) | undefined = undefined
+  let triggerUpdateRoot: (() => void) | undefined = undefined
 
   const atomObservers = new Map<RecoilState<any>, JSX.Element>()
   const atomListeners = new Map<RecoilState<any>, AtomListenerSetOrNull>()
-
-  let garbages: RecoilState<any>[] = []
-
-  function clearGarbages() {
-    garbages.forEach((atom) => {
-      if (atomListeners.get(atom)?.size === 0) {
-        atomObservers.delete(atom)
-      }
-    })
-    garbages = []
-  }
 
   /**
    *  Root jsx element of recoil-observer
@@ -37,16 +26,12 @@ export function createContext() {
     const [_, setVersion] = useRecoilState(versionAtom)
 
     useEffect(() => {
-      if (garbages.length > 0) {
-        clearGarbages()
-      }
-
-      trigger = () => {
+      triggerUpdateRoot = () => {
         setVersion((curr) => curr + 1)
       }
 
       return () => {
-        trigger = undefined
+        triggerUpdateRoot = undefined
       }
     }, [])
 
@@ -71,9 +56,10 @@ export function createContext() {
 
     useEffect(() => {
       if (mounted) {
-      atomListeners.get(atom)?.forEach((fn) => {
-        fn?.(value)
-      })
+        atomListeners.get(atom)?.forEach((fn) => {
+          fn?.(value)
+        })
+      }
     }, [value])
 
     return <></>
@@ -94,7 +80,7 @@ export function createContext() {
     atomObservers.set(atom, observer)
 
     // update recoil-observer root
-    trigger?.()
+    triggerUpdateRoot?.()
   }
 
   /**
@@ -110,8 +96,7 @@ export function createContext() {
 
       if (listenerSet.size === 0) {
         atomObservers.delete(atom)
-        // we can't call `trigger`
-        garbages.push(atom)
+        triggerUpdateRoot?.()
       }
     }
   }
